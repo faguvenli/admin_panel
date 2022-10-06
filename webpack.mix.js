@@ -17,6 +17,7 @@ let third_party_assets = {
         {"name": "jquery-confirm", "filename": "jquery-confirm", "assets": ["./node_modules/jquery-confirm/dist/jquery-confirm.min.js", "./node_modules/jquery-confirm/dist/jquery-confirm.min.css"]},
         {"name": "jscolor", "filename": "jscolor", "assets": ["./node_modules/@eastdesire/jscolor/jscolor.js"]},
         {"name": "daterangepicker", "filename": "daterangepicker", "assets": ["./node_modules/daterangepicker/daterangepicker.js", "./node_modules/daterangepicker/daterangepicker.css"]},
+
         {
             "name": "trumbowyg",
             "filename": "trumbowyg",
