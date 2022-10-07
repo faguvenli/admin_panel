@@ -72,6 +72,11 @@ $font-weight-semibold: 600;
 // apex charts
 $apex-grid-color: #f8f9fa;
 
+// table
+$table-head-bg:               $gray-100;
+$table-dark-border-color:     tint-color($gray-800, 7.5%);
+
+
 // Variables
 //
 // Variables should follow the `$component-state-property-size` formula for
@@ -157,10 +162,6 @@ $theme-colors: (
     "dark":       $dark
 );
 // scss-docs-end theme-colors-map
-
-// table
-$table-head-bg:               $gray-100;
-$table-dark-border-color:     tint-color($gray-800, 7.5%);
 
 // The contrast ratio to reach against white, to determine if color changes from "light" to "dark". Acceptable values for WCAG 2.0 are 3, 4.5 and 7.
 // See https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast
@@ -329,6 +330,7 @@ $spacers: (
     5: ($spacer * 3)
 );
 
+$negative-spacers: if($enable-negative-margins, negativify-map($spacers), null);
 
 // Position
 //
@@ -346,9 +348,9 @@ $position-values: (
 //
 // Settings for the `<body>` element.
 
-$body-bg:                   #f8f8fb;
+$body-bg:                   #e6e6ea;
 $body-color:                $gray-700;
-$body-text-align:           left;
+$body-text-align:           null;
 
 
 // Links
@@ -364,7 +366,6 @@ $link-hover-decoration:                   underline;
 $stretched-link-pseudo-element:           after;
 $stretched-link-z-index:                  1;
 
-$card-bg:                           $white;
 
 
 // Paragraphs
@@ -390,6 +391,11 @@ $grid-breakpoints: (
 );
 // scss-docs-end grid-breakpoints
 
+
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include _assert-starts-at-zero($grid-breakpoints, "$grid-breakpoints");
+
+
 // Grid containers
 //
 // Define the maximum width of `.container` for different screen sizes.
@@ -403,6 +409,9 @@ $container-max-widths: (
     xxl: 1320px
 );
 // scss-docs-end container-max-widths
+
+@include _assert-ascending($container-max-widths, "$container-max-widths");
+
 
 // Grid columns
 //
@@ -871,7 +880,7 @@ $form-file-button-color:          $input-color;
 $form-file-button-bg:             $input-group-addon-bg;
 $form-file-button-hover-bg:       shade-color($form-file-button-bg, 5%);
 
-$form-floating-height:            add(3.5rem, $input-height-border);
+$form-floating-height:            add(3rem, $input-height-border);
 $form-floating-padding-x:         $input-padding-x;
 $form-floating-padding-y:         1rem;
 $form-floating-input-padding-t:   1.625rem;
@@ -1084,7 +1093,7 @@ $card-cap-bg:                       rgba($black, .03);
 $card-cap-color:                    null;
 $card-height:                       null;
 $card-color:                        null;
-
+$card-bg:                           $white;
 
 
 $card-title-desc:                   $gray-600;
@@ -1146,7 +1155,6 @@ $form-feedback-tooltip-font-size:     $tooltip-font-size;
 $form-feedback-tooltip-line-height:   $line-height-base;
 $form-feedback-tooltip-opacity:       $tooltip-opacity;
 $form-feedback-tooltip-border-radius: $tooltip-border-radius;
-
 
 
 // Popovers

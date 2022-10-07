@@ -4,7 +4,7 @@
             <!-- LOGO -->
             <div class="navbar-brand-box">
 
-                <a href="{{ route('dashboard.index') }}" class="logo logo-light">
+                <a href="{{ route('admin.dashboard.index') }}" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="{{ asset('images/logo-white.png') }}" alt="" height="22">
                     </span>
@@ -30,17 +30,21 @@
                     </span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
+                @if(auth()->check())
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="javascript:;" data-bs-toggle="modal" data-bs-target="#profileModal">Profil</a>
+
+                    <a class="dropdown-item" href="{{ route('admin.profile.show', auth()->id()) }}">Profil</a>
                     <a class="dropdown-item text-danger" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
                         <span key="t-logout">Çıkış</span>
                     </a>
+
                     {!! Form::open(['route' => 'logout', 'method' => 'POST', 'id' => 'logout-form']) !!}
 
                     {!! Form::close() !!}
                 </div>
+                @endif
             </div>
 
         </div>

@@ -2,6 +2,54 @@
 
     'use strict';
 
+    if($.fn.dataTable) {
+        $.extend($.fn.dataTableExt.oStdClasses, {
+            "sFilterInput": "form-control",
+        });
+    }
+
+    let sidebar_open = localStorage.getItem('sidebar-open')||"true";
+
+    if(sidebar_open == "true") {
+        $('body').removeClass('vertical-collpsed');
+    } else {
+        $('body').addClass('vertical-collpsed');
+    }
+
+    let width = $(".main_button_holder").width();
+    let stylesheet = document.styleSheets[0];
+    if(width) {
+        stylesheet.insertRule(".search_place_holder { width: " + width + "px; }", 0);
+    }
+
+    $(document).on("click", "table.rowClick tbody tr", function() {
+        if($(this).data('href')) {
+            window.location.href = $(this).data('href');
+        }
+    })
+
+    if($(".texteditor").length) {
+        tinymce.init({
+            selector: "textarea.texteditor",
+            height: 300,
+            plugins: [
+                "advlist autolink link lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "save table contextmenu directionality emoticons template paste textcolor"
+            ],
+            toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | print preview media fullpage | forecolor backcolor emoticons",
+            style_formats: [
+                {title: 'Bold text', inline: 'b'},
+                {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+                {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+                {title: 'Example 1', inline: 'span', classes: 'example1'},
+                {title: 'Example 2', inline: 'span', classes: 'example2'},
+                {title: 'Table styles'},
+                {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+            ]
+        })
+    }
+
     function initMetisMenu() {
         //metis menu
         $("#side-menu").metisMenu();
@@ -10,11 +58,19 @@
     function initLeftMenuCollapse() {
         $('#vertical-menu-btn').on('click', function (event) {
             event.preventDefault();
+
             $('body').toggleClass('sidebar-enable');
+
             if ($(window).width() >= 992) {
                 $('body').toggleClass('vertical-collpsed');
             } else {
                 $('body').removeClass('vertical-collpsed');
+            }
+
+            if($('body').hasClass('vertical-collpsed')) {
+                localStorage.setItem('sidebar-open', false)
+            } else {
+                localStorage.setItem('sidebar-open', true)
             }
         });
     }
